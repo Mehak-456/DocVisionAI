@@ -1,0 +1,11 @@
+{
+  "invoice_number": "INV-2023-007",
+  "invoice_date": "2023-10-27",
+  "vendor_name": "ACME TECHNOLOGY CORP",
+  "GSTIN": "27AAAAA1111A1Z1",
+  "buyer_name": "Rohan Das",
+  "total_amount": 2106.0,
+  "subtotal": 1950.0,
+  "tax": 156.0,
+  "currency": "USD"
+}

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docvisionai_engine
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./lora_adapters:/app/lora_adapters
+      - ./datasets:/app/datasets
+      - ./temp_uploads:/app/temp_uploads
+    env_file:
+      - .env
+    restart: unless-stopped

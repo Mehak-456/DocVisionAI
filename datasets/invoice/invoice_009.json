@@ -1,0 +1,11 @@
+{
+  "invoice_number": "INV-2023-009",
+  "invoice_date": "2023-10-29",
+  "vendor_name": "ACME TECHNOLOGY CORP",
+  "GSTIN": "27AAAAA1111A1Z1",
+  "buyer_name": "Arjun Nair",
+  "total_amount": 2430.0,
+  "subtotal": 2250.0,
+  "tax": 180.0,
+  "currency": "USD"
+}

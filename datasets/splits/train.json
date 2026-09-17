@@ -1,0 +1,86 @@
+[
+  {
+    "id": "mock_invoice_1",
+    "image": "/Users/vivekchauhan/.gemini/antigravity/scratch/DocVisionAI/datasets/mock_images/mock_doc.png",
+    "doc_type": "invoice",
+    "conversations": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "text",
+            "text": "Extract structured details from this invoice: invoice_number, invoice_date, vendor_name, GSTIN, buyer_name, total_amount, subtotal, tax, currency."
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"invoice_number\": \"INV-2026-999\", \"invoice_date\": \"2026-07-28\", \"vendor_name\": \"CloudTech Solutions\", \"GSTIN\": \"27AAAAA1111A1Z1\", \"buyer_name\": \"Vivek Chauhan\", \"total_amount\": 1628.4, \"subtotal\": 1380.0, \"tax\": 248.4, \"currency\": \"USD\"}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mock_aadhaar_1",
+    "image": "/Users/vivekchauhan/.gemini/antigravity/scratch/DocVisionAI/datasets/mock_images/mock_doc.png",
+    "doc_type": "aadhaar",
+    "conversations": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "text",
+            "text": "Extract details from this Aadhaar card: name, aadhaar_number, DOB, gender, address."
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"name\": \"Vivek Chauhan\", \"aadhaar_number\": \"1234-5678-9012\", \"DOB\": \"15/08/1998\", \"gender\": \"Male\", \"address\": \"Delhi, India\"}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mock_pan_1",
+    "image": "/Users/vivekchauhan/.gemini/antigravity/scratch/DocVisionAI/datasets/mock_images/mock_doc.png",
+    "doc_type": "pan",
+    "conversations": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "text",
+            "text": "Extract details from this PAN card: PAN Number, Name, Father's Name, DOB."
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"PAN Number\": \"ABCDE1234F\", \"Name\": \"VIVEK CHAUHAN\", \"Father's Name\": \"R. S. CHAUHAN\", \"DOB\": \"15/08/1998\"}"
+          }
+        ]
+      }
+    ]
+  }
+]

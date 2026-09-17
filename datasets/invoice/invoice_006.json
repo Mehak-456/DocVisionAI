@@ -1,0 +1,11 @@
+{
+  "invoice_number": "INV-2023-006",
+  "invoice_date": "2023-10-26",
+  "vendor_name": "ACME TECHNOLOGY CORP",
+  "GSTIN": "27AAAAA1111A1Z1",
+  "buyer_name": "Riya Patel",
+  "total_amount": 1944.0,
+  "subtotal": 1800.0,
+  "tax": 144.0,
+  "currency": "USD"
+}

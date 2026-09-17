@@ -1,0 +1,21 @@
+# Python virtual environments and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.env
+venv/
+.venv/
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Project-specific temporary folders
+temp_uploads/
+app/static/uploads/
+
+# Large model weights and data splits (if needed)
+lora_adapters/
+app/models/easyocr_weights/

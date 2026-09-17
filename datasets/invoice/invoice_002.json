@@ -1,0 +1,11 @@
+{
+  "invoice_number": "INV-2023-002",
+  "invoice_date": "2023-10-22",
+  "vendor_name": "ACME TECHNOLOGY CORP",
+  "GSTIN": "27AAAAA1111A1Z1",
+  "buyer_name": "Diya Sharma",
+  "total_amount": 1296.0,
+  "subtotal": 1200.0,
+  "tax": 96.0,
+  "currency": "USD"
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocVisionAI | Vision Language Model Document Extraction</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="glow-container">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Application Header -->
+    <header class="app-header">
+        <div class="brand">
+            <span class="logo-icon">👁️‍🗨️</span>
+            <div>
+                <h1>DocVisionAI</h1>
+                <p class="subtitle">Fine-Tuned Qwen2.5-VL with LoRA & EasyOCR</p>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="system-status">
+                <div class="status-indicator online"></div>
+                <span>VLM Pipeline: Active</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- DASHBOARD VIEW -->
+    <div id="dashboardContainer" class="dashboard-wrapper">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <div>
+                <h2>Welcome to DocVisionAI 👋</h2>
+                <p>Upload invoices or identity documents (Aadhaar, PAN) for OCR & fine-tuned Qwen2.5-VL extraction.</p>
+            </div>
+        </div>
+
+        <main class="dashboard-grid">
+            <!-- Left Pane: Upload & Image Viewer -->
+            <section class="card upload-section">
+                <div class="card-header">
+                    <h2>Document Preprocessing & OCR</h2>
+                    <span class="step-badge">Step 1 & 2</span>
+                </div>
+
+                <!-- Upload Area -->
+                <div class="upload-dropzone" id="dropzone">
+                    <input type="file" id="fileInput" accept="image/*,application/pdf" hidden>
+                    <div class="upload-prompt" id="uploadPrompt">
+                        <span class="upload-icon">📤</span>
+                        <h3>Drag & drop document</h3>
+                        <p>Supports PNG, JPG, WEBP, PDF (Invoice, Aadhaar, PAN)</p>
+                        <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+                    </div>
+                    <div class="preview-container hidden" id="previewContainer">
+                        <canvas id="canvasOverlay"></canvas>
+                        <img id="imagePreview" alt="Document Preview">
+                    </div>
+                </div>
+
+                <!-- Configuration Options -->
+                <div class="controls-panel">
+                    <div class="input-group">
+                        <label for="docTypeSelect">Document Schema Model</label>
+                        <select id="docTypeSelect" class="form-select">
+                            <option value="auto">Auto-detect Document Type</option>
+                            <option value="invoice">Invoice Template</option>
+                            <option value="aadhaar">Aadhaar Card</option>
+                            <option value="pan">PAN Card</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" id="processBtn" disabled>
+                        <span class="btn-text">Run Extract Pipeline</span>
+                        <span class="spinner hidden" id="btnSpinner"></span>
+                    </button>
+                </div>
+
+                <!-- OCR Bounding Box Info -->
+                <div class="ocr-info hidden" id="ocrInfoPanel">
+                    <div class="info-row">
+                        <span>OCR Detection Boxes:</span>
+                        <strong id="ocrBoxCount">0</strong>
+                    </div>
+                    <div class="info-row">
+                        <span>Hover over bounding boxes to inspect raw text</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Pane: Model Output & Training Analytics -->
+            <section class="card results-section">
+                <!-- Summary Stats Ribbon -->
+                <div class="stats-ribbon">
+                    <div class="stat-box">
+                        <span class="stat-label">OCR Latency</span>
+                        <span class="stat-val" id="statOcrTime">-</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">LoRA VLM Latency</span>
+                        <span class="stat-val" id="statVlmTime">-</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Confidence Score</span>
+                        <span class="stat-val text-accent" id="statConfidence">-</span>
+                    </div>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="extracted-data">Structured Output</button>
+                    <button class="tab-btn" data-tab="authenticity-check">Authenticity Check</button>
+                    <button class="tab-btn" data-tab="lora-metrics">LoRA Run Metrics</button>
+                    <button class="tab-btn" data-tab="tech-specs">Training Specs</button>
+                </div>
+
+                <!-- Tab Content: Extracted Structured JSON -->
+                <div class="tab-content active" id="extracted-data">
+                    <div class="json-actions">
+                        <span>Target Format: JSON Output</span>
+                        <button class="btn btn-tiny" id="copyJsonBtn">Copy JSON</button>
+                    </div>
+                    <div class="code-wrapper">
+                        <pre><code id="jsonOutput" class="language-json">// Upload a document to trigger the end-to-end extraction.
+// Qwen2.5-VL with LoRA adapters will generate structured keys.</code></pre>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Authenticity Check -->
+                <div class="tab-content" id="authenticity-check">
+                    <div class="auth-results-wrapper" id="authResultsContent">
+                        <div style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                            Upload a document to view authenticity detection results.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: LoRA Metrics Charts -->
+                <div class="tab-content" id="lora-metrics">
+                    <div class="charts-grid">
+                        <div class="chart-wrapper">
+                            <h3>Training Cross-Entropy Loss</h3>
+                            <canvas id="lossChart"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <h3>Inference VRAM Footprint (GB)</h3>
+                            <canvas id="vramChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Technical Details -->
+                <div class="tab-content" id="tech-specs">
+                    <div class="specs-grid">
+                        <div class="spec-card">
+                            <h4>LoRA Configuration (PEFT)</h4>
+                            <ul>
+                                <li><strong>Rank (R):</strong> 16</li>
+                                <li><strong>Alpha (&alpha;):</strong> 32</li>
+                                <li><strong>Dropout:</strong> 0.05</li>
+                                <li><strong>Target Layers:</strong> Attention projections
+                                    <code class="layer-code">q_proj, k_proj, v_proj, o_proj</code>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="spec-card">
+                            <h4>Base Model Foundation</h4>
+                            <ul>
+                                <li><strong>Model:</strong> Qwen2.5-VL-7B-Instruct</li>
+                                <li><strong>Input:</strong> Multi-modal (Image + System Prompt)</li>
+                                <li><strong>Attention:</strong> FlashAttention-2 enabled</li>
+                                <li><strong>Quantization:</strong> float16 / bfloat16</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="specs-full">
+                        <h4>Why apply LoRA to Qwen2.5-VL?</h4>
+                        <p>
+                            VLMs contain billions of parameters. Standard visual encoders and projection gates consume enormous memory. 
+                            By targeting the linear attention heads (Q, K, V, O) with Low-Rank Adapters, we preserve spatial and semantic alignment 
+                            while restricting weight updates to only 0.65% (about 45M parameters). This allows fine-tuning on a single consumer GPU (24GB VRAM) 
+                            instead of requiring multi-GPU node clusters.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="app-footer">
+        <p>DocVisionAI Core - Multi-Modal Information Extraction Dashboard | Built for Production Deployment</p>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

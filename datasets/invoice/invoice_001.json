@@ -1,0 +1,11 @@
+{
+  "invoice_number": "INV-2023-001",
+  "invoice_date": "2023-10-21",
+  "vendor_name": "ACME TECHNOLOGY CORP",
+  "GSTIN": "27AAAAA1111A1Z1",
+  "buyer_name": "Aarav Mehta",
+  "total_amount": 1134.0,
+  "subtotal": 1050.0,
+  "tax": 84.0,
+  "currency": "USD"
+}

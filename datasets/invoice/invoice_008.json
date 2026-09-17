@@ -1,0 +1,11 @@
+{
+  "invoice_number": "INV-2023-008",
+  "invoice_date": "2023-10-28",
+  "vendor_name": "ACME TECHNOLOGY CORP",
+  "GSTIN": "27AAAAA1111A1Z1",
+  "buyer_name": "Sneha Reddy",
+  "total_amount": 2268.0,
+  "subtotal": 2100.0,
+  "tax": 168.0,
+  "currency": "USD"
+}

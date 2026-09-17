@@ -1,0 +1,11 @@
+{
+  "invoice_number": "INV-2023-003",
+  "invoice_date": "2023-10-23",
+  "vendor_name": "ACME TECHNOLOGY CORP",
+  "GSTIN": "27AAAAA1111A1Z1",
+  "buyer_name": "Ishaan Gupta",
+  "total_amount": 1458.0,
+  "subtotal": 1350.0,
+  "tax": 108.0,
+  "currency": "USD"
+}

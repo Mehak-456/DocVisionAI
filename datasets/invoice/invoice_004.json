@@ -1,0 +1,11 @@
+{
+  "invoice_number": "INV-2023-004",
+  "invoice_date": "2023-10-24",
+  "vendor_name": "ACME TECHNOLOGY CORP",
+  "GSTIN": "27AAAAA1111A1Z1",
+  "buyer_name": "Ananya Verma",
+  "total_amount": 1620.0,
+  "subtotal": 1500.0,
+  "tax": 120.0,
+  "currency": "USD"
+}
